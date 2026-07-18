@@ -2,29 +2,63 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <!-- Linha crucial para o site se ajustar ao tamanho da tela de qualquer celular -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Pra você ✨</title>
   <style>
     body {
       background: #0f0f0f;
       color: white;
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       text-align: center;
-      padding: 30px;
+      padding: 20px 15px;
+      margin: 0;
+      box-sizing: border-box;
     }
 
-    h1 { color: #ffd60a; }
+    h1 { 
+      color: #ffd60a; 
+      font-size: 2rem;
+      margin-top: 20px;
+    }
 
-    .box { margin-top: 40px; }
+    h2 {
+      font-size: 1.4rem;
+      line-height: 1.3;
+      padding: 0 10px;
+    }
 
+    p {
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    .box { 
+      margin-top: 30px; 
+      padding: 0 10px;
+    }
+
+    /* Botões otimizados para o toque no celular (Largura total e confortáveis) */
     button {
-      padding: 12px 20px;
-      margin: 10px;
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      padding: 15px 20px;
+      margin: 12px auto;
       background: #ffd60a;
       border: none;
       color: black;
-      border-radius: 8px;
+      border-radius: 12px;
       cursor: pointer;
       font-weight: bold;
+      font-size: 1rem;
+      transition: background 0.2s;
+      /* Evita o efeito cinza feio ao tocar no celular */
+      -webkit-tap-highlight-color: transparent; 
+    }
+
+    button:active {
+      background: #e6c000;
     }
 
     button:disabled {
@@ -34,19 +68,28 @@
     }
 
     input {
-      padding: 10px;
-      border-radius: 8px;
+      width: 100%;
+      max-width: 200px;
+      padding: 14px;
+      border-radius: 12px;
       border: none;
-      margin-top: 10px;
+      margin-top: 15px;
+      font-size: 1.2rem;
       text-align: center;
+      background: #222;
+      color: white;
     }
 
     .card {
       background: #1a1a1a;
-      padding: 15px;
-      margin: 10px auto;
-      width: 80%;
-      border-radius: 10px;
+      padding: 18px 15px;
+      margin: 12px auto;
+      width: 100%;
+      max-width: 340px;
+      border-radius: 12px;
+      box-sizing: border-box;
+      font-size: 1rem;
+      line-height: 1.4;
     }
 
     .hidden {
@@ -59,20 +102,21 @@
 
     #erro {
       color: #ff6b6b;
-      margin-top: 10px;
+      margin-top: 12px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-  <h1>✨ Danielly ✨</h1>
+  <h1>Dani ✨</h1>
 
   <!-- BOTÃO INICIAL -->
   <div class="box" id="quizContainer">
-    <button id="btnQuiz"  onclick="iniciarQuiz()">
+    <button id="btnQuiz" onclick="iniciarQuiz()">
       QUIZ PARA TERÇA-FEIRA
     </button>
-    <p>Só terça meu meu bem</p>
+    <p>Só terça meu bem</p>
     <p id="status"></p>
   </div>
 
@@ -95,21 +139,21 @@
   <div class="box" id="pergunta2">
     <h2>2. São mais de 2hrs de filme do meu lado… você está ciente? 🎬</h2>
     <button onclick="responder(2,1)">SIM, ESTOU</button>
-    <button onclick="responder(2,2)">NÃO, MAS VOU ASSIM MESMO</button>
+    <button onclick="responder(2,2)">NÃO, MAS VAMOS ASSISTIR KKKK</button>
   </div>
 
   <!-- PERGUNTA 3 -->
   <div class="box" id="spoiler">
     <h2>3. Alerta de spoiler 👀</h2>
-    <p>Talvez eu acabe prestando mais atenção no tom escuro dos seus olhos… do que no filme 🎬</p>
+    <p style="padding: 0 15px;">Talvez eu acabe prestando mais atenção no tom escuro dos seus olhos… do que no filme 🎬</p>
 
-    <button onclick="responder(3,1)">Tá tudo bem 😌</button>
-    <button onclick="responder(3,2)">Quero ver você tentar 😏</button>
+    <button onclick="responder(3,1)">Tá tudo bem 1 😌</button>
+    <button onclick="responder(3,2)">Tá tudo bem 2 😌kk</button>
   </div>
 
   <!-- PERGUNTA 4 -->
   <div class="box" id="pergunta4">
-    <h2>4. Acho que você curte o trabalho da Ana Hartway… coincidência ou escolhi bem o filme? 👀</h2>
+    <h2>4. Acho que você curte o trabalho da Anne Hathaway… coincidência ou escolhi bem o filme? 👀</h2>
     <button onclick="responder(4,1)">Escolha inteligente 😏</button>
     <button onclick="responder(4,2)">Vamos ver ainda 👀</button>
   </div>
@@ -120,11 +164,11 @@
 
     <button onclick="enviar()">ENVIAR RESPOSTAS</button>
 
-    <div style="margin-top:20px;">
-      <p>🔒 Quer ver a surpresa? Digita a senha 👀</p>
-      <input type="password" id="senha" maxlength="5" placeholder="*****">
+    <div style="margin-top:30px;">
+      <p>🔒 Digita a senha 👀</p>
+      <input type="password" id="senha" inputmode="numeric" pattern="[0-9]*" maxlength="5" placeholder="*****">
       <br>
-      <button onclick="desbloquear()">Desbloquear</button>
+      <button onclick="desbloquear()" style="margin-top: 15px;">Desbloquear</button>
       <p id="erro"></p>
     </div>
   </div>
@@ -153,25 +197,20 @@
 
   function iniciarQuiz() {
     document.getElementById("inicio").style.display = "block";
+    document.getElementById("btnQuiz").style.display = "none";
   }
 
   function responder(pergunta, valor) {
     respostas[pergunta] = valor;
 
-    // PERGUNTA INICIAL
     if (pergunta === 0) {
-
-      // 👉 CASO ELA NÃO POSSA IR
       if (valor === 2) {
         alert("Que pena 😕");
-
-        // reset
         respostas = {};
         document.getElementById("inicio").style.display = "none";
-
+        document.getElementById("btnQuiz").style.display = "block";
         return;
       }
-
       document.getElementById("inicio").style.display = "none";
       document.getElementById("pergunta1").style.display = "block";
     }
@@ -194,20 +233,25 @@
     if (pergunta === 4) {
       document.getElementById("pergunta4").style.display = "none";
       document.getElementById("final").style.display = "block";
-
       document.getElementById("quizContainer").classList.add("hidden");
     }
   }
 
   function enviar() {
     const numero = "5521994707188";
-    const mensagem =
-`Respostas:
-Dia:${respostas[0]}
-1:${respostas[1]}
-2:${respostas[2]}
-3:${respostas[3]}
-4:${respostas[4]}`;
+    const textoDia = respostas[0] === 1 ? "Não foi legal, mas estou bem" : "Meu dia foi bom";
+    const textoP1 = respostas[1] === 1 ? "Sim, vamos kk" : "Não, demorou demais 😅";
+    const textoP2 = respostas[2] === 1 ? "Sim, estou" : "Não, mas vamos assistir kkkk";
+    const textoP3 = respostas[3] === 1 ? "Tá tudo bem 1😌" : "Tá tudo bem 2😌kk";
+    const textoP4 = respostas[4] === 1 ? "Escolha inteligente 😏" : "Vamos ver ainda 👀";
+
+    const mensagem = 
+`Respostas do Quiz da Dani:
+• Como foi o dia: ${textoDia}
+• Vamos finalmente sair: ${textoP1}
+• Ciente das 2h de filme: ${textoP2}
+• Alerta de spoiler: ${textoP3}
+• Escolha do filme (Anne): ${textoP4}`;
 
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, "_blank");
@@ -219,6 +263,10 @@ Dia:${respostas[0]}
     if (senha === "90909") {
       document.getElementById("conteudo").style.display = "block";
       document.getElementById("erro").innerText = "";
+      // Faz a página rolar suavemente para o conteúdo liberado
+      setTimeout(() => {
+        document.getElementById("conteudo").scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     } else {
       document.getElementById("erro").innerText = "Senha errada 😅";
     }
