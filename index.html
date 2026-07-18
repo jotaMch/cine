@@ -194,6 +194,7 @@
 
   <script>
   let respostas = {};
+  const numeroWpp = "5521994707188";
 
   function iniciarQuiz() {
     document.getElementById("inicio").style.display = "block";
@@ -206,6 +207,12 @@
     if (pergunta === 0) {
       if (valor === 2) {
         alert("Que pena 😕");
+        
+        // Encaminha direto para o seu WhatsApp avisando a resposta
+        const msgRecusa = "Oi! Respondi o Quiz, mas hoje não vai dar pra ir. 😕";
+        const urlRecusa = `https://wa.me/${numeroWpp}?text=${encodeURIComponent(msgRecusa)}`;
+        window.open(urlRecusa, "_blank");
+
         respostas = {};
         document.getElementById("inicio").style.display = "none";
         document.getElementById("btnQuiz").style.display = "block";
@@ -238,7 +245,6 @@
   }
 
   function enviar() {
-    const numero = "5521994707188";
     const textoDia = respostas[0] === 1 ? "Não foi legal, mas estou bem" : "Meu dia foi bom";
     const textoP1 = respostas[1] === 1 ? "Sim, vamos kk" : "Não, demorou demais 😅";
     const textoP2 = respostas[2] === 1 ? "Sim, estou" : "Não, mas vamos assistir kkkk";
@@ -253,7 +259,7 @@
 • Alerta de spoiler: ${textoP3}
 • Escolha do filme (Anne): ${textoP4}`;
 
-    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+    const url = `https://wa.me/${numeroWpp}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, "_blank");
   }
 
