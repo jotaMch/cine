@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Pra você ✨</title>
+  <style>
+    body {
+      background: #0f0f0f;
+      color: white;
+      font-family: Arial;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 { color: #ffd60a; }
+
+    .box { margin-top: 40px; }
+
+    button {
+      padding: 12px 20px;
+      margin: 10px;
+      background: #ffd60a;
+      border: none;
+      color: black;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:disabled {
+      background: #555;
+      color: #aaa;
+      cursor: not-allowed;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .card {
+      background: #1a1a1a;
+      padding: 15px;
+      margin: 10px auto;
+      width: 80%;
+      border-radius: 10px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    #inicio, #pergunta1, #pergunta2, #spoiler, #pergunta4, #final, #conteudo {
+      display: none;
+    }
+
+    #erro {
+      color: #ff6b6b;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>✨ Danielly ✨</h1>
+
+  <!-- BOTÃO INICIAL -->
+  <div class="box" id="quizContainer">
+    <button id="btnQuiz"  onclick="iniciarQuiz()">
+      QUIZ PARA TERÇA-FEIRA
+    </button>
+    <p>Só terça meu meu bem</p>
+    <p id="status"></p>
+  </div>
+
+  <!-- PERGUNTA INICIAL -->
+  <div class="box" id="inicio">
+    <h2>Como foi o dia?</h2>
+    <button onclick="responder(0,1)">NÃO FOI LEGAL, MAS ESTOU BEM</button>
+    <button onclick="responder(0,2)">NÃO FOI LEGAL, NÃO VAI DAR HOJE</button>
+    <button onclick="responder(0,3)">MEU DIA FOI BOM</button>
+  </div>
+
+  <!-- PERGUNTA 1 -->
+  <div class="box" id="pergunta1">
+    <h2>1. Então… vamos finalmente sair ou é alguma pegadinha? 👀</h2>
+    <button onclick="responder(1,1)">SIM, VAMOS KK</button>
+    <button onclick="responder(1,2)">NÃO, DEMOROU DEMAIS 😅</button>
+  </div>
+
+  <!-- PERGUNTA 2 -->
+  <div class="box" id="pergunta2">
+    <h2>2. São mais de 2hrs de filme do meu lado… você está ciente? 🎬</h2>
+    <button onclick="responder(2,1)">SIM, ESTOU</button>
+    <button onclick="responder(2,2)">NÃO, MAS VOU ASSIM MESMO</button>
+  </div>
+
+  <!-- PERGUNTA 3 -->
+  <div class="box" id="spoiler">
+    <h2>3. Alerta de spoiler 👀</h2>
+    <p>Talvez eu acabe prestando mais atenção no tom escuro dos seus olhos… do que no filme 🎬</p>
+
+    <button onclick="responder(3,1)">Tá tudo bem 😌</button>
+    <button onclick="responder(3,2)">Quero ver você tentar 😏</button>
+  </div>
+
+  <!-- PERGUNTA 4 -->
+  <div class="box" id="pergunta4">
+    <h2>4. Acho que você curte o trabalho da Ana Hartway… coincidência ou escolhi bem o filme? 👀</h2>
+    <button onclick="responder(4,1)">Escolha inteligente 😏</button>
+    <button onclick="responder(4,2)">Vamos ver ainda 👀</button>
+  </div>
+
+  <!-- FINAL -->
+  <div class="box" id="final">
+    <h2>Pronto 😌</h2>
+
+    <button onclick="enviar()">ENVIAR RESPOSTAS</button>
+
+    <div style="margin-top:20px;">
+      <p>🔒 Quer ver a surpresa? Digita a senha 👀</p>
+      <input type="password" id="senha" maxlength="5" placeholder="*****">
+      <br>
+      <button onclick="desbloquear()">Desbloquear</button>
+      <p id="erro"></p>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div id="conteudo">
+
+    <div class="box">
+      <h2>3 coisas que eu gosto em você</h2>
+      <div class="card">✨ Você é doce</div>
+      <div class="card">✨ Seus olhos escuros</div>
+      <div class="card">✨ Seu sorriso gentil</div>
+    </div>
+
+    <div class="box">
+      <h2>Alguns momentos</h2>
+      <div class="card">💬 1° vez que te vi no arpoador</div>
+      <div class="card">😄 Quando ficou sem graça falando cmg no leblon</div>
+      <div class="card">😄 Quando tentou me levar pra festa</div>
+    </div>
+
+  </div>
+
+  <script>
+  let respostas = {};
+
+  function iniciarQuiz() {
+    document.getElementById("inicio").style.display = "block";
+  }
+
+  function responder(pergunta, valor) {
+    respostas[pergunta] = valor;
+
+    // PERGUNTA INICIAL
+    if (pergunta === 0) {
+
+      // 👉 CASO ELA NÃO POSSA IR
+      if (valor === 2) {
+        alert("Que pena 😕");
+
+        // reset
+        respostas = {};
+        document.getElementById("inicio").style.display = "none";
+
+        return;
+      }
+
+      document.getElementById("inicio").style.display = "none";
+      document.getElementById("pergunta1").style.display = "block";
+    }
+
+    if (pergunta === 1) {
+      document.getElementById("pergunta1").style.display = "none";
+      document.getElementById("pergunta2").style.display = "block";
+    }
+
+    if (pergunta === 2) {
+      document.getElementById("pergunta2").style.display = "none";
+      document.getElementById("spoiler").style.display = "block";
+    }
+
+    if (pergunta === 3) {
+      document.getElementById("spoiler").style.display = "none";
+      document.getElementById("pergunta4").style.display = "block";
+    }
+
+    if (pergunta === 4) {
+      document.getElementById("pergunta4").style.display = "none";
+      document.getElementById("final").style.display = "block";
+
+      document.getElementById("quizContainer").classList.add("hidden");
+    }
+  }
+
+  function enviar() {
+    const numero = "5521994707188";
+    const mensagem =
+`Respostas:
+Dia:${respostas[0]}
+1:${respostas[1]}
+2:${respostas[2]}
+3:${respostas[3]}
+4:${respostas[4]}`;
+
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+    window.open(url, "_blank");
+  }
+
+  function desbloquear() {
+    const senha = document.getElementById("senha").value;
+
+    if (senha === "90909") {
+      document.getElementById("conteudo").style.display = "block";
+      document.getElementById("erro").innerText = "";
+    } else {
+      document.getElementById("erro").innerText = "Senha errada 😅";
+    }
+  }
+</script>
+
+</body>
+</html>
